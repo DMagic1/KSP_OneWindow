@@ -39,29 +39,29 @@ namespace OneWindow
     public class OneWindow_Settings : MonoBehaviour
     {
 		[Persistent]
-		public byte ContentLocation = 15;
+		public byte ContentLocation = 7;
 		[Persistent]
 		public byte GameSceneStatus = 15;
 		[Persistent]
-		public bool ShowLocationIcon = false;
+		public bool ShowLocationIcon = true;
 		[Persistent]
-		public bool ShowRealTime = false;
+		public bool ShowRealTime = true;
 		[Persistent]
-		public bool ShowKSPTime = true;
+		public bool ShowKSPTime = false;
 		[Persistent]
 		public bool ShowStandardMessages = true;
 		[Persistent]
 		public string TimeFormat = "H:mm:ss";
 		[Persistent]
-		public Vector2 SCPosition = new Vector2(60, -100);
+		public Vector2 SCPosition = new Vector2(30, -78);
 		[Persistent]
-		public Vector2 EditorPosition = new Vector2(60, -100);
+		public Vector2 EditorPosition = new Vector2(270, -60);
 		[Persistent]
-		public Vector2 TrackingPosition = new Vector2(60, -100);
+		public Vector2 TrackingPosition = new Vector2(300, -52);
 		[Persistent]
-		public Vector2 FlightPosition = new Vector2(60, -100);
+		public Vector2 FlightPosition = new Vector2(90, -48);
 		[Persistent]
-		public Vector2 Size = new Vector2(560, 300);
+		public Vector2 Size = new Vector2(550, 330);
 
 		private static bool loaded;
 		private static OneWindow_Settings instance;

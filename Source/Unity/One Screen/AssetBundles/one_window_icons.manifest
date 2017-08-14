@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3034881794
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e3aa6229a646dfe0a648236c81f44784
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9dea23ffc7e96552740e12d1ee5309d8
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Icons/UL On.png
+- Assets/Icons/LC On.png
+- Assets/Icons/UC On.png
+- Assets/Icons/UR On.png
+Dependencies: []

@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2568166154
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: one_window_prefabs
+      Dependencies: {}

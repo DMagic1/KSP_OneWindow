@@ -55,6 +55,10 @@ namespace OneWindow_Unity.Unity
 		[SerializeField]
 		private Toggle m_LocationToggle = null;
 		[SerializeField]
+		private Slider m_SliderScale = null;
+		[SerializeField]
+		private TextHandler m_SliderText = null;
+		[SerializeField]
 		private TextHandler m_TitleText = null;
 		[SerializeField]
 		private RectTransform m_Content = null;
@@ -62,6 +66,8 @@ namespace OneWindow_Unity.Unity
 		private ScrollRect m_Scroll = null;
 		[SerializeField]
 		private GameObject m_MessagePrefab = null;
+		[SerializeField]
+		private GameObject m_SettingsHolder = null;
 		[SerializeField]
 		private Vector2 _widthLimit = new Vector2(400, 800);
 		[SerializeField]
@@ -75,6 +81,8 @@ namespace OneWindow_Unity.Unity
 		{
 			get { return _winInterface; }
 		}
+
+		private Animator _anim;
 
 		private RectTransform _rect;
 		private Vector2 _mouseStart;
@@ -98,6 +106,7 @@ namespace OneWindow_Unity.Unity
 		private void Awake()
 		{
 			_rect = GetComponent<RectTransform>();
+			_anim = GetComponent<Animator>();
 
 			_instance = this;
 		}
@@ -124,11 +133,22 @@ namespace OneWindow_Unity.Unity
 			if (m_LocationToggle != null)
 				m_LocationToggle.isOn = win.ShowLocationIcon;
 
+			if (m_SliderScale != null)
+				m_SliderScale.value = win.UIScale * 10;
+
+			if (m_SliderText != null)
+				m_SliderText.OnTextUpdate.Invoke("Scale: " + win.UIScale.ToString("P0"));
+
+			if (m_SettingsHolder != null)
+				m_SettingsHolder.SetActive(false);
+
 			SetToggles();
 			
 			SetPosition(win.Position);
 
 			SetSize(win.Size);
+
+			SetScale(win.UIScale);
 
 			_loaded = true;
 		}
@@ -159,6 +179,14 @@ namespace OneWindow_Unity.Unity
 				size.y = _heightLimit.y;
 
 			_rect.sizeDelta = new Vector2(size.x, size.y);
+		}
+
+		private void SetScale(float scale)
+		{
+			if (_rect == null)
+				return;
+
+			_rect.localScale = Vector3.one * scale;
 		}
 
 		public void OnBeginDrag(PointerEventData eventData)
@@ -322,6 +350,14 @@ namespace OneWindow_Unity.Unity
 				_currentMessages[i].transform.SetParent(m_Content, false);
 		}
 
+		public void ToggleSettings(bool isOn)
+		{
+			if (_anim == null)
+				return;
+
+			_anim.SetBool("settings", isOn);
+		}
+
 		public void PrintToLog()
 		{
 			Debug.Log("[One_Window] Preparing Screen Message Data Dump...");
@@ -334,6 +370,44 @@ namespace OneWindow_Unity.Unity
 			}
 
 			Debug.Log(string.Format("[One_Window] {0} Messages written to log file", _currentMessages.Count));
+		}
+
+		public void CycleFont()
+		{
+			if (_winInterface == null)
+				return;
+
+			int size = _winInterface.FontSize + 1;
+
+			if (size > 3)
+				size = 0;
+
+			_winInterface.FontSize = size;
+			
+			for (int i = _allMessages.Count - 1; i >= 0; i--)
+			{
+				MessageContent content = _allMessages[i];
+
+				content.UpdateTimeStamps(_winInterface.ShowRealTime, _winInterface.ShowKSPTime);
+			}
+		}
+
+		public void UpdateScale(float scale)
+		{
+			if (!_loaded || m_SliderText == null)
+				return;
+
+			m_SliderText.OnTextUpdate.Invoke("Scale: " + (scale / 10).ToString("P0"));
+		}
+
+		public void SetUIScale()
+		{
+			if (_winInterface == null || m_SliderScale == null)
+				return;
+
+			_winInterface.UIScale = m_SliderScale.value / 10;
+
+			SetScale(_winInterface.UIScale);
 		}
 
 		private bool NoToggled()

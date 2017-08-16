@@ -42,6 +42,7 @@ namespace OneWindow_Unity
 			Button,
 			Toggle,
 			VerticalScrollbar,
+			HorizontalSlider,
 		}
 
 		[SerializeField]
@@ -113,6 +114,27 @@ namespace OneWindow_Unity
 				return;
 
 			scrollThumb.sprite = thumb;
+		}
+
+		public void setSlider(Sprite background, Sprite thumb, Sprite thumbHighlight, Sprite thumbActive)
+		{
+			setSelectable(thumb, thumbHighlight, thumbActive, thumbActive);
+
+			if (background == null)
+				return;
+
+			Slider slider = GetComponent<Slider>();
+
+			if (slider == null)
+				return;
+
+			Image back = slider.GetComponentInChildren<Image>();
+
+			if (back == null)
+				return;
+
+			back.sprite = background;
+			back.type = Image.Type.Sliced;
 		}
 	}
 }

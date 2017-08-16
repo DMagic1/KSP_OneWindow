@@ -248,6 +248,9 @@ namespace OneWindow
 				case StyleHandler.StyleTypes.VerticalScrollbar:
 					style.setScrollbar(skin.verticalScrollbar.normal.background, skin.verticalScrollbarThumb.normal.background);
 					break;
+				case StyleHandler.StyleTypes.HorizontalSlider:
+					style.setSlider(skin.horizontalSlider.normal.background, skin.horizontalSliderThumb.normal.background, skin.horizontalSliderThumb.highlight.background, skin.horizontalSliderThumb.active.background);
+					break;
 				default:
 					break;
 			}

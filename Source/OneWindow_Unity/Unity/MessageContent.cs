@@ -99,7 +99,31 @@ namespace OneWindow_Unity.Unity
 
 			if (m_Message != null)
 			{
-				string text = string.Format("{0}{1}{2}", OneWindow.Instance.WinInterface.ShowRealTime ? mes.RealTime + "  " : "", OneWindow.Instance.WinInterface.ShowKSPTime ? mes.KSPTime + "  " : "",  mes.Message);
+				int small = 14;
+				int large = 16;
+
+				switch(OneWindow.Instance.WinInterface.FontSize)
+				{
+					case 0:
+						small = 10;
+						large = 12;
+						break;
+					case 1:
+						small = 12;
+						large = 14;
+						break;
+					case 2:
+						small = 14;
+						large = 16;
+						break;
+					case 3:
+					default:
+						small = 16;
+						large = 18;
+						break;
+				}
+
+				string text = string.Format("<size={0}>{1}{2}</size><size={3}>{4}</size>", small, OneWindow.Instance.WinInterface.ShowRealTime ? mes.RealTime + "  " : "", OneWindow.Instance.WinInterface.ShowKSPTime ? mes.KSPTime + "  " : "", large,  mes.Message);
 
 				m_Message.OnTextUpdate.Invoke(text);
 				m_Message.OnColorUpdate.Invoke(mes.TextColor);
@@ -110,7 +134,31 @@ namespace OneWindow_Unity.Unity
 
 		public void UpdateTimeStamps(bool realOn, bool kspOn)
 		{
-			string text = string.Format("{0}{1}{2}", realOn ? mesInterface.RealTime + "  " : "", kspOn ? mesInterface.KSPTime + "  " : "", _text);
+			int small = 14;
+			int large = 16;
+
+			switch (OneWindow.Instance.WinInterface.FontSize)
+			{
+				case 0:
+					small = 10;
+					large = 12;
+					break;
+				case 1:
+					small = 12;
+					large = 14;
+					break;
+				case 2:
+					small = 14;
+					large = 16;
+					break;
+				case 3:
+				default:
+					small = 16;
+					large = 18;
+					break;
+			}
+
+			string text = string.Format("<size={0}>{1}{2}</size><size={3}>{4}</size>", small, realOn ? mesInterface.RealTime + "  " : "", kspOn ? mesInterface.KSPTime + "  " : "", large, _text);
 
 			if (m_Message != null)
 				m_Message.OnTextUpdate.Invoke(text);
@@ -124,10 +172,34 @@ namespace OneWindow_Unity.Unity
 
 		public void UpdateText(string text, bool realOn, bool kspOn)
 		{
+			int small = 14;
+			int large = 16;
+
+			switch (OneWindow.Instance.WinInterface.FontSize)
+			{
+				case 0:
+					small = 10;
+					large = 12;
+					break;
+				case 1:
+					small = 12;
+					large = 14;
+					break;
+				case 2:
+					small = 14;
+					large = 16;
+					break;
+				case 3:
+				default:
+					small = 16;
+					large = 18;
+					break;
+			}
+
 			_text = text;
 
-			string newText = string.Format("{0}{1}{2}", realOn ? mesInterface.RealTime + "  " : "", kspOn ? mesInterface.KSPTime + "  " : "", _text);
-			
+			string newText = string.Format("<size={0}>{1}{2}</size><size={3}>{4}</size>", small, realOn ? mesInterface.RealTime + "  " : "", kspOn ? mesInterface.KSPTime + "  " : "", large, _text);
+
 			if (m_Message != null)
 				m_Message.OnTextUpdate.Invoke(newText);
 		}

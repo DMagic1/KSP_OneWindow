@@ -405,6 +405,18 @@ namespace OneWindow
 			set { OneWindow_Settings.Instance.ShowStandardMessages = value; }
 		}
 
+		public int FontSize
+		{
+			get { return OneWindow_Settings.Instance.FontSize; }
+			set { OneWindow_Settings.Instance.FontSize = value; }
+		}
+
+		public float UIScale
+		{
+			get { return OneWindow_Settings.Instance.UIScale; }
+			set { OneWindow_Settings.Instance.UIScale = value; }
+		}
+
 		public Vector2 Position
 		{
 			get

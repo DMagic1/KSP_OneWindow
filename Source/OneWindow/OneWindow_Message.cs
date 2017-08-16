@@ -73,9 +73,9 @@ namespace OneWindow
 
 			_timeStamp = DateTime.Now.TimeOfDay.TotalSeconds;
 
-			_realTime = "<size=14>" + DateTime.Now.ToString(OneWindow_Settings.Instance.TimeFormat) + "</size>";
+			_realTime = DateTime.Now.ToString(OneWindow_Settings.Instance.TimeFormat);
 
-			_kspTime = "<size=14>" + KSPUtil.PrintDateCompact(Planetarium.GetUniversalTime(), true, true) + "</size>";
+			_kspTime = KSPUtil.PrintDateCompact(Planetarium.GetUniversalTime(), true, true);
 		}
 
 		public void SetMessage(MessageContent content)

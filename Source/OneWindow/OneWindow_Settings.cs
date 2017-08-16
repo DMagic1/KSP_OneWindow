@@ -53,6 +53,10 @@ namespace OneWindow
 		[Persistent]
 		public string TimeFormat = "H:mm:ss";
 		[Persistent]
+		public int FontSize = 2;
+		[Persistent]
+		public float UIScale = 1;
+		[Persistent]
 		public Vector2 SCPosition = new Vector2(30, -78);
 		[Persistent]
 		public Vector2 EditorPosition = new Vector2(270, -60);

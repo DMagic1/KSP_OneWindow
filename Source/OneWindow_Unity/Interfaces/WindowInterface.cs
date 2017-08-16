@@ -46,6 +46,10 @@ namespace OneWindow_Unity.Interfaces
 
 		bool ShowStandardMessages { get; set; }
 
+		int FontSize { get; set; }
+
+		float UIScale { get; set; }
+
 		Vector2 Position { get; set; }
 
 		Vector2 Size { get; set; }
